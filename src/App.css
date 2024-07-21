@@ -36,3 +36,36 @@
     transform: rotate(360deg);
   }
 }
+
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
+.decorated-button {
+  padding: 15px 30px;
+  font-size: 18px;
+  color: #fff;
+  background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.decorated-button:hover {
+  background: linear-gradient(45deg, #2575fc 0%, #6a11cb 100%);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.decorated-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
