@@ -14,7 +14,7 @@ const FormFiles = ({handleSubmit, handleChange, event, isFormSubmitted}) => {
 
 {isFormSubmitted && event.name === "" && (
                           <div className="invalid-feedback">
-                            Please select a Event Name.
+                            Please Enter a Event Name.
                           </div>
                         )}
             </div>
@@ -111,10 +111,10 @@ const FormFiles = ({handleSubmit, handleChange, event, isFormSubmitted}) => {
                         isFormSubmitted && event.subEvents === ""
                           ? "is-invalid"
                           : ""
-                      }`} type="number" name="subEvents" value={event.subEvents} onChange={handleChange}  />
+                      }`} type="text" name="subEvents" value={event.subEvents} onChange={handleChange}  />
                  {isFormSubmitted && event.subEvents === "" && (
                           <div className="invalid-feedback">
-                            Please select a Sub Event.
+                            Please Enter a Sub Event.
                           </div>
                         )}
             </div>
