@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdDelete, MdEditSquare ,MdOutlineSearch} from "react-icons/md";
 import Modal from 'react-bootstrap/Modal'
-
+import { FaSort } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import FormFiles from './formFiles';
 
@@ -77,7 +77,44 @@ const EventList = ({query}) => {
       } else return false
     }
   
-    
+  
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
+
+    const filds = [
+      {name : "Id", label : "id"},
+      {name : "Event Name", label : "name"},
+      {name : "Event Type", label : "type"},
+      {name : "Start Date", label : "startDate"},
+      {name : "End Date", label : "endDate"},
+      {name : "Description", label : "description"},
+      {name : "Handled By", label : "handledBy"},
+      {name : "Organisation", label : "organisation"},
+      {name : "Sub-Events", label : "subEvents"},
+      {name : "Action", label : ""},
+
+    ]
+
+  const sortedData = events.sort((a, b) => {
+    if (a[sortConfig.key] < b[sortConfig.key]) {
+      return sortConfig.direction === 'ascending' ? -1 : 1;
+    }
+    if (a[sortConfig.key] > b[sortConfig.key]) {
+      return sortConfig.direction === 'ascending' ? 1 : -1;
+    }
+    return 0;
+  });
+  
+  const requestSort = (key) => {
+    let direction = 'ascending';
+    if (
+      sortConfig.key === key &&
+      sortConfig.direction === 'ascending'
+    ) {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
     return (
       <>
       
@@ -85,23 +122,18 @@ const EventList = ({query}) => {
        
        <table className='table table-bordered'>
               <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Event Name</th>
-                  <th>Event Type</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Description</th>
-                  <th>Handled By</th>
-                  <th>Organisation</th>
-                  <th>Sub-Events</th>
+                <tr style={{cursor : "pointer"}}>
+                {filds && filds.map((ab) => (
+                  <th onClick={() => requestSort(ab.label)}>{ab.name} <FaSort /></th>
 
-                  <th>Action</th>
+                ))}
+
+              
                 </tr>
               </thead>
               <tbody>
             
-                {events ? events.filter((obj) => {
+                {sortedData && sortedData.length > 0 ? sortedData.filter((obj) => {
                   if (query == "") return obj;
                   else if (
                     obj.name.toLowerCase().includes(query.toLowerCase()) ||
