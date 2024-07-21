@@ -69,11 +69,14 @@ const EventList = ({query}) => {
   }
   };
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
+      const value = window.confirm("Are you Sure want to delete");
+      if (value) {
         dispatch({ type: 'DELETE_EVENT', payload: id });
-         toast("Event Deleted Successfully")
-    };
-
+             toast("Event Deleted Successfully")
+      } else return false
+    }
+  
     
     return (
       <>
