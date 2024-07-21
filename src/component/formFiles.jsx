@@ -111,7 +111,7 @@ const FormFiles = ({handleSubmit, handleChange, event, isFormSubmitted}) => {
                         isFormSubmitted && event.subEvents === ""
                           ? "is-invalid"
                           : ""
-                      }`} type="text" name="subEvents" value={event.subEvents} onChange={handleChange}  />
+                      }`} type="number" name="subEvents" value={event.subEvents} onChange={handleChange}  />
                  {isFormSubmitted && event.subEvents === "" && (
                           <div className="invalid-feedback">
                             Please Enter a Sub Event.
